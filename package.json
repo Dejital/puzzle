@@ -1,0 +1,9 @@
+{
+  "name": "nzpuzzle",
+  "version": "1.0.0",
+  "description": "Clone of the New Zealand Puzzle",
+  "main": "index.js",
+  "scripts": { },
+  "author": "Serge Nevsky",
+  "license": "MIT"
+}
