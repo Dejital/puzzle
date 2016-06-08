@@ -1,0 +1,16 @@
+body {
+    margin: 5em;
+}
+
+.spot {
+    display: block;
+    width: 2em;
+    height: 2em;
+    border: .5em solid blue;
+    background: wheat;
+    float: left;
+}
+
+.spot-on {
+    background: blue;
+}
