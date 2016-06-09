@@ -1,16 +1,40 @@
 body {
+    background: navajowhite;
     margin: 5em;
+}
+
+.game-pieces {
+    clear: left;
 }
 
 .spot {
     display: block;
     width: 2em;
     height: 2em;
-    border: .5em solid blue;
-    background: wheat;
+    border: .5em solid royalblue;
     float: left;
 }
 
 .spot-on {
-    background: blue;
+    background: darkred;
+}
+
+.spot-clear {
+    clear: left;
+}
+
+.piece {
+    display: block;
+    width: 2em;
+    height: 2em;
+    border: .5em solid darkred;
+    float: left;
+}
+
+.piece-selected {
+    border-color: crimson;
+}
+
+.piece-hidden {
+    display: none;
 }
