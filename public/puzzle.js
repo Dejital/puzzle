@@ -18,13 +18,17 @@
         spot.className = 'spot';
         spot.setAttribute('x', x);
         spot.setAttribute('y', y);
+        spot.setAttribute('isOpen', true);
 
         spot.onclick = function () {
           if (game.selectedPiece){
-            var id = game.selectedPiece.getAttribute('id');
-            game.pieces[id].className = 'piece-hidden';
-            game.pieces.splice(id, 1);
+            // TODO: Check if legal to place
+
+            game.selectedPiece.className = 'piece-hidden';
+            game.selectedPiece.setAttribute('isPlaced', true);
+
             this.className += ' spot-on';
+
             game.selectedPiece = '';
             game.resetPieces();
           }
@@ -42,9 +46,14 @@
   };
 
   this.resetPieces = function() {
-    var count = this.pieces.length;
-    for (var i = 0; i < count; i++){
-      this.pieces[i].className = 'piece';
+    var game = this;
+
+    for (var i = 0; i < game.pieces.length; i++){
+      var piece = game.pieces[i];
+      var isPlaced = piece.getAttribute('isPlaced');
+      if (isPlaced === false){
+        piece.className = 'piece';
+      }
     }
   };
 
@@ -56,7 +65,7 @@
     for (var i = 0; i < count; i++) {
       piece = document.createElement('span');
       piece.className = 'piece';
-      piece.setAttribute('id', i);
+      piece.setAttribute('isPlaced', false);
 
       piece.onclick = function () {
         game.resetPieces();
