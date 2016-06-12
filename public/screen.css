@@ -32,7 +32,7 @@ body {
 }
 
 .piece-selected {
-    border-color: crimson;
+    border-color: dimgray;
 }
 
 .piece-hidden {

@@ -18,8 +18,9 @@
     board.innerHTML = '';
     var id = 0;
 
-    for (var x = 0; x < dimension; x++) {
-      for (var y = 0; y < dimension; y++) {
+    for (var y = 0; y < dimension; y++) {
+      var row = [];
+      for (var x = 0; x < dimension; x++) {
 
         var type = configuration[id];
         var color = colors[type];
@@ -34,17 +35,20 @@
 
         spot.onclick = function () {
           var isOpen = this.getAttribute('isOpen');
-          debugger;
-          if (isOpen === 'true' && game.selectedPiece){
+          var x = parseInt(this.getAttribute('x'));
+          var y = parseInt(this.getAttribute('y'));
+          if (game.canPlacePiece(x,y)){
 
             // TODO: Check if legal to place
 
-            game.selectedPiece.className = 'piece-hidden';
-            game.selectedPiece.setAttribute('isPlaced', true);
+            var selectedPiece = game.selectedPiece;
+            selectedPiece.className = 'piece-hidden';
+            selectedPiece.setAttribute('isPlaced', true);
 
-            var type = game.selectedPiece.getAttribute('type');
+            var type = selectedPiece.getAttribute('type');
             var color = colors[type];
             this.setAttribute('isOpen', false);
+            this.setAttribute('type', type);
             this.setAttribute('style', 'background:' + color);
             this.className += ' spot-on';
 
@@ -53,14 +57,15 @@
           }
         };
 
-        if (y === 0){
+        if (x === 0){
           spot.className += ' spot-clear';
         }
 
-        this.board.push(spot);
+        row.push(spot);
         board.appendChild(spot);
         id++;
       }
+      this.board.push(row);
     }
 
   };
@@ -71,7 +76,7 @@
     for (var i = 0; i < game.pieces.length; i++){
       var piece = game.pieces[i];
       var isPlaced = piece.getAttribute('isPlaced');
-      if (isPlaced === false){
+      if (isPlaced === 'false'){
         piece.className = 'piece';
       }
     }
@@ -103,6 +108,37 @@
       }
     }
 
+  };
+
+  this.canPlacePiece = function(x, y) {
+    if (!this.selectedPiece)
+      return false;
+
+    var spot = this.board[y][x];
+    if (spot.getAttribute('isOpen') === 'false')
+      return false;
+
+    var type = this.selectedPiece.getAttribute('type');
+    var length = this.board.length;
+    if (spot.getAttribute('type') === type)
+      return false;
+    if (y > 0 && this.board[y-1][x].getAttribute('type') === type)
+      return false;
+    if (y < length-1 && this.board[y+1][x].getAttribute('type') === type)
+      return false;
+    if (x > 0 && this.board[y][x-1].getAttribute('type') === type)
+      return false;
+    if (x < length-1 && this.board[y][x+1].getAttribute('type') === type)
+      return false;
+    if (x > 0 && y > 0 && this.board[y-1][x-1].getAttribute('type') === type)
+      return false;
+    if (x < length-1 && y > 0 && this.board[y-1][x+1].getAttribute('type') === type)
+      return false;
+    if (x > 0 && y < length-1 && this.board[y+1][x-1].getAttribute('type') === type)
+      return false;
+    if (x < length-1 && y < length-1 && this.board[y+1][x+1].getAttribute('type') === type)
+      return false;
+    return true;
   };
 
   var dimension = 4;
