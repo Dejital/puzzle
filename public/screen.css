@@ -1,10 +1,26 @@
 body {
     background: navajowhite;
     margin: 5em;
+    font-family: sans-serif;
 }
 
-.game-pieces {
+.reset-button {
+    float: left;
+}
+
+.game-board {
     clear: left;
+}
+
+.game-board, .game-pieces {
+    float:left;
+    display: block;
+    width: 12em;
+    margin: 1em;
+}
+
+.instructions {
+    clear: both;
 }
 
 .spot {
@@ -27,8 +43,9 @@ body {
     display: block;
     width: 2em;
     height: 2em;
-    border: .5em solid black;
+    border: .4em solid black;
     float: left;
+    margin: .1em;
 }
 
 .piece-selected {

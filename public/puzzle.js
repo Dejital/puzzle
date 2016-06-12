@@ -3,10 +3,12 @@
   this.board = [];
   this.pieces = [];
   this.selectedPiece = '';
+  this.score = 0;
 
   var board = document.querySelector('.game-board');
   var pieces = document.querySelector('.game-pieces');
-  
+  var counter = document.querySelector('.counter');
+
   var colors = ['blue', 'magenta', 'lawngreen', 'goldenrod', 'cyan'];
 
   var defaultBoardConfiguration = [4,2,4,1,3,1,3,0,2,0,2,1,1,4,3,0];
@@ -54,6 +56,8 @@
 
             game.selectedPiece = '';
             game.resetPieces();
+            game.score++;
+            game.updateCounter(game.score);
           }
         };
 
@@ -141,9 +145,15 @@
     return true;
   };
 
+  this.updateCounter = function(score) {
+    var game = this;
+    counter.innerHTML = score;
+  };
+
   var dimension = 4;
 
   this.setupBoard(board, defaultBoardConfiguration, dimension);
   this.setupPieces(pieces, defaultPiecesDistribution);
+  this.updateCounter(0);
 
 })();
