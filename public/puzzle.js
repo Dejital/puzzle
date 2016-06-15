@@ -6,10 +6,12 @@ function puzzle() {
   var pieces = [];
   var selectedPiece = '';
   var score = 0;
+  var undoHistory = [];
 
   var boardContainer = document.querySelector('.game-board');
   var piecesContainer = document.querySelector('.game-pieces');
   var counterContainer = document.querySelector('.counter');
+  var undoButton = document.querySelector('.undo-button');
 
   var colors = ['blue', 'magenta', 'lawngreen', 'goldenrod', 'cyan'];
 
@@ -34,6 +36,7 @@ function puzzle() {
         spot.setAttribute('x', x);
         spot.setAttribute('y', y);
         spot.setAttribute('isOpen', true);
+        spot.setAttribute('startingType', type);
         spot.setAttribute('type', type);
         spot.setAttribute('style', 'background:' + color);
 
@@ -51,6 +54,8 @@ function puzzle() {
             this.setAttribute('type', type);
             this.setAttribute('style', 'background:' + color);
             this.className += ' spot-on';
+
+            undoHistory.push([selectedPiece, this]);
 
             selectedPiece = '';
             resetPieces();
@@ -148,8 +153,39 @@ function puzzle() {
       counterContainer.innerHTML = score;
   }
 
+  function undo() {
+
+    var historyLength = undoHistory.length;
+    if (historyLength > 0){
+
+      var step = undoHistory[historyLength - 1];
+      var piece = step[0];
+      var spot = step[1];
+      var type = spot.getAttribute('startingType');
+      var color = colors[type];
+
+      piece.className = 'piece';
+      piece.setAttribute('isPlaced', false);
+
+      spot.className = 'spot';
+      spot.setAttribute('isOpen', true);
+      spot.setAttribute('type', type);
+      spot.setAttribute('style', 'background:' + color);
+
+      selectedPiece = '';
+      resetPieces();
+      score--;
+      updateCounter(score);
+
+      undoHistory.splice(historyLength - 1, 1);
+
+    }
+
+  }
+
   setupBoard(defaultBoardConfiguration, dimension);
   setupPieces(defaultPiecesDistribution);
   updateCounter(0);
+  undoButton.onclick = undo;
 
 }

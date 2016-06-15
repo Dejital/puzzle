@@ -14,10 +14,6 @@ body {
     margin: 0 auto;
 }
 
-.reset-button {
-    float: left;
-}
-
 .game-board, .game-pieces {
     float:left;
     display: block;
@@ -77,6 +73,8 @@ a:focus {
 }
 
 .pure-button {
+    margin-right: 1em;
+    float:left;
     background: transparent;
     border: 2px solid black;
 }
