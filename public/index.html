@@ -6,22 +6,29 @@
         <link rel="stylesheet" href="screen.css">
     </head>
     <body>
-        <h1>New Zealand Puzzle</h1>
+        <div class="container">
+            <h1>New Zealand Puzzle</h1>
 
-        <p>
-            <label>Score: </label>
-            <span class="counter"></span>
-        </p>
+            <p>
+                <label>Score: </label>
+                <span class="counter"></span>
+            </p>
 
-        <input class="pure-button reset-button" type="button" value="Reset" onClick="window.location.reload()">
+            <input class="pure-button reset-button" type="button" value="Reset" onClick="window.location.reload()">
 
-        <div class="game-board">Loading..</div>
-        <div class="game-pieces">Loading..</div>
+            <div class="game-board">Loading..</div>
+            <div class="game-pieces">Loading..</div>
 
-        <div class="instructions">
-            <h2>Instructions</h2>
-            <p>Bring pieces from the right side and place them on the board to the left.</p>
-            <p>Same color pieces cannot be touching.</p>
+            <div class="instructions">
+                <h2>Instructions</h2>
+                <p>Select pieces from the right side and place them on the board to the left.</p>
+                <p>Same color pieces cannot touch.</p>
+                <p>Fill the empty board with all the pieces completely.</p>
+            </div>
+
+            <footer>
+                <a href="http://snevsky.com">App by Serge Nevsky</a>
+            </footer>
         </div>
 
         <script src="puzzle.js"></script>

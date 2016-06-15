@@ -142,12 +142,15 @@
       return false;
     if (x < length-1 && y < length-1 && this.board[y+1][x+1].getAttribute('type') === type)
       return false;
+
     return true;
   };
 
   this.updateCounter = function(score) {
-    var game = this;
-    counter.innerHTML = score;
+    if (score === dimension * dimension)
+      counter.innerHTML = score + ' Success!';
+    else
+      counter.innerHTML = score;
   };
 
   var dimension = 4;
