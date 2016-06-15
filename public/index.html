@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="screen.css">
     </head>
-    <body>
+    <body onload="puzzle()">
         <div class="container">
             <h1>New Zealand Puzzle</h1>
 
@@ -14,7 +14,7 @@
                 <span class="counter"></span>
             </p>
 
-            <input class="pure-button reset-button" type="button" value="Reset" onClick="window.location.reload()">
+            <input class="pure-button reset-button" type="button" value="Reset" onClick="puzzle()">
 
             <div class="game-board">Loading..</div>
             <div class="game-pieces">Loading..</div>
