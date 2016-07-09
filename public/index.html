@@ -2,18 +2,13 @@
 <html lang="en">
     <head>
         <title>New Zealand Puzzle</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=0.8">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="screen.css">
     </head>
     <body onload="puzzle()">
         <div class="container">
             <h1>New Zealand Puzzle</h1>
-
-            <p>
-                <label>Score: </label>
-                <span class="counter"></span>
-            </p>
 
             <input class="pure-button reset-button" type="button" value="Reset" onClick="puzzle()">
             <input class="pure-button undo-button" type="button" value="Undo">
@@ -23,9 +18,9 @@
 
             <div class="instructions">
                 <h2>Instructions</h2>
-                <p>Select pieces from the right side and place them on the board to the left.</p>
-                <p>Same color pieces cannot touch.</p>
-                <p>Fill the empty board with all the pieces completely.</p>
+                <p>Select a loose piece to place it on the game board.</p>
+                <p>Same color pieces cannot touch vertically, horizontally or diagonally.</p>
+                <p>Complete the puzzle by filling the entire board.</p>
             </div>
 
             <footer>

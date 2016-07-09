@@ -5,15 +5,13 @@ function puzzle() {
   var board = [];
   var pieces = [];
   var selectedPiece = '';
-  var score = 0;
   var undoHistory = [];
 
   var boardContainer = document.querySelector('.game-board');
   var piecesContainer = document.querySelector('.game-pieces');
-  var counterContainer = document.querySelector('.counter');
   var undoButton = document.querySelector('.undo-button');
 
-  var colors = ['blue', 'magenta', 'lawngreen', 'goldenrod', 'cyan'];
+  var colors = ['#4CB648', '#0C9CEE', '#FDEA2E', '#9A47CB', '#DA1212'];
 
   var defaultBoardConfiguration = [4,2,4,1,3,1,3,0,2,0,2,1,1,4,3,0];
   var defaultPiecesDistribution = [3,3,3,4,3];
@@ -59,8 +57,6 @@ function puzzle() {
 
             selectedPiece = '';
             resetPieces();
-            score++;
-            updateCounter(score);
           }
         };
 
@@ -102,8 +98,15 @@ function puzzle() {
 
         piece.onclick = function () {
           resetPieces();
-          this.className = 'piece piece-selected';
-          selectedPiece = this;
+          if (selectedPiece === this) {
+              this.className = 'piece';
+              selectedPiece = null;
+          }
+          else {
+              resetPieces();
+              this.className = 'piece piece-selected';
+              selectedPiece = this;
+          }
         };
 
         pieces.push(piece);
@@ -146,13 +149,6 @@ function puzzle() {
     return true;
   }
 
-  function updateCounter(score) {
-    if (score === dimension * dimension)
-      counterContainer.innerHTML = score + ' Success!';
-    else
-      counterContainer.innerHTML = score;
-  }
-
   function undo() {
 
     var historyLength = undoHistory.length;
@@ -174,8 +170,6 @@ function puzzle() {
 
       selectedPiece = '';
       resetPieces();
-      score--;
-      updateCounter(score);
 
       undoHistory.splice(historyLength - 1, 1);
 
@@ -185,7 +179,6 @@ function puzzle() {
 
   setupBoard(defaultBoardConfiguration, dimension);
   setupPieces(defaultPiecesDistribution);
-  updateCounter(0);
   undoButton.onclick = undo;
 
 }
