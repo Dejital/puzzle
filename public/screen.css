@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    max-width: 30em;
+    width: 26em;
     margin: 0 auto;
 }
 
@@ -31,6 +31,8 @@ body {
 
 .instructions {
     clear: both;
+    text-align: center;
+    height: 3em;
 }
 
 .spot {

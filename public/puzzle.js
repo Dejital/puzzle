@@ -6,10 +6,22 @@ function puzzle() {
   var pieces = [];
   var selectedPiece = '';
   var undoHistory = [];
+  var frustrationCounter = 0;
 
   var boardContainer = document.querySelector('.game-board');
   var piecesContainer = document.querySelector('.game-pieces');
   var undoButton = document.querySelector('.undo-button');
+  var instructions = document.querySelector('.instructions');
+
+  var instructionsTexts = [
+    'Select a loose piece &#8593;',
+    '&#8593; Place it on the game board',
+    'Same color pieces cannot touch <br> (vertically, horizontally or diagonally)',
+    'Complete the puzzle by filling the entire board',
+    'Good luck! Keep going.',
+    '&nbsp;'
+  ];
+  var instructionsPhase = 0;
 
   var colors = ['#4CB648', '#0C9CEE', '#FDEA2E', '#9A47CB', '#DA1212'];
 
@@ -18,6 +30,9 @@ function puzzle() {
   var dimension = 4;
 
   function setupBoard(configuration, dimension) {
+
+    instructionsPhase = -1;
+    incrementInstructions();
 
     boardContainer.innerHTML = '';
     var id = 0;
@@ -43,6 +58,10 @@ function puzzle() {
           var x = parseInt(this.getAttribute('x'));
           var y = parseInt(this.getAttribute('y'));
           if (canPlacePiece(x,y)){
+            if (instructionsPhase > 1){
+              incrementInstructions();
+            }
+
             selectedPiece.className = 'piece-hidden';
             selectedPiece.setAttribute('isPlaced', true);
 
@@ -55,8 +74,22 @@ function puzzle() {
 
             undoHistory.push([selectedPiece, this]);
 
+            if (undoHistory.length === dimension * dimension)
+              instructions.innerHTML = 'Congratulations, the puzzle is solved!';
+
+            frustrationCounter = 0;
             selectedPiece = '';
             resetPieces();
+          }
+          else {
+            frustrationCounter++;
+            if (instructionsPhase > 2)
+              instructions.innerHTML = instructionsTexts[2];
+            if (frustrationCounter > 15)
+              instructions.innerHTML = 'Stuck? Try a Reset.'
+          }
+          if (instructionsPhase === 1){
+            incrementInstructions();
           }
         };
 
@@ -83,6 +116,13 @@ function puzzle() {
     }
   }
 
+  function incrementInstructions() {
+    instructionsPhase++;
+    if (instructionsPhase > 5)
+      instructionsPhase = 5;
+    instructions.innerHTML = instructionsTexts[instructionsPhase];
+  }
+
   function setupPieces(distribution) {
 
     piecesContainer.innerHTML = '';
@@ -98,6 +138,9 @@ function puzzle() {
 
         piece.onclick = function () {
           resetPieces();
+          if (instructionsPhase === 0){
+            incrementInstructions(instructionsPhase);
+          }
           if (selectedPiece === this) {
               this.className = 'piece';
               selectedPiece = null;
