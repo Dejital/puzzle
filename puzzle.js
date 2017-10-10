@@ -19,7 +19,7 @@ function puzzle() {
     'Same color pieces cannot touch <br> (vertically, horizontally or diagonally)',
     'Complete the puzzle by filling the entire board',
     'Good luck! Keep going.',
-    '&nbsp;'
+    ''
   ];
   var instructionsPhase = 0;
 
