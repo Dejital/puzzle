@@ -10,9 +10,13 @@ body {
     font-size: 1.2em;
 }
 
-.container {
+.container, footer {
     width: 26em;
     margin: 0 auto;
+}
+
+.container {
+    height: 500px;
 }
 
 .game-board, .game-pieces {
@@ -32,7 +36,14 @@ body {
 .instructions {
     clear: both;
     text-align: center;
-    height: 3em;
+    background: white;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 .1em .1em 0 rgba(0,0,102,0.2);
+}
+
+.instructions:empty {
+    display: none;
 }
 
 .spot {
