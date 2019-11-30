@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="screen.css">
     </head>
-    <body onload="puzzle()">
+    <body onload="puzzle(1)">
         <div class="container">
             <h1>New Zealand Puzzle</h1>
 
@@ -18,7 +18,13 @@
 
             <h3 class="instructions"></h3>
 
+            <div>
+                <input class="pure-button" type="button" value="Original" onclick="puzzle(1)">
+                <input class="pure-button" type="button" value="Variation 1" onclick="puzzle(2)">
+                <input class="pure-button" type="button" value="Variation 2" onclick="puzzle(3)">
+            </div>
         </div>
+        
         <footer>
             <a href="http://snevsky.com">App by Serge Nevsky</a>
         </footer>

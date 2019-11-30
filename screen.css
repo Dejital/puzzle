@@ -11,8 +11,13 @@ body {
 }
 
 .container, footer {
+    clear: both;
     width: 26em;
     margin: 0 auto;
+}
+
+footer {
+    padding-top: 1em;
 }
 
 .container {

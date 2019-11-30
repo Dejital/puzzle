@@ -1,6 +1,39 @@
 'use strict';
 
-function puzzle() {
+function getBoard(variationNum) {
+    
+  if (variationNum === 2) {
+    return {
+      boardConfiguration: [3,4,3,2,2,1,0,1,0,3,2,4,1,4,0,3],
+      pieceDistribution: [3,3,3,4,3]
+    }
+  }
+  
+  if (variationNum === 3) {
+    return {
+      boardConfiguration: [2,1,0,3,0,3,4,2,4,2,1,0,1,0,3,4],
+      pieceDistribution: [3,3,3,4,3]
+    }
+  }
+  
+  // Original (default) board configuration
+  return {
+    boardConfiguration: [4,2,4,1,3,1,3,0,2,0,2,1,1,4,3,0],
+    pieceDistribution: [3,3,3,4,3]
+  }
+  
+}
+
+var priorVariation = 1;
+
+function puzzle(variationNum) {
+  
+  if (variationNum !== 1 && variationNum !== 2 && variationNum !== 3) {
+    variationNum = priorVariation;
+  }
+  else {
+    priorVariation = variationNum;
+  }
 
   var board = [];
   var pieces = [];
@@ -25,8 +58,9 @@ function puzzle() {
 
   var colors = ['#4CB648', '#0C9CEE', '#FDEA2E', '#9A47CB', '#DA1212'];
 
-  var defaultBoardConfiguration = [4,2,4,1,3,1,3,0,2,0,2,1,1,4,3,0];
-  var defaultPiecesDistribution = [3,3,3,4,3];
+  var defaultBoard = getBoard(variationNum);
+  var defaultBoardConfiguration = defaultBoard.boardConfiguration;
+  var defaultPiecesDistribution = defaultBoard.pieceDistribution;
   var dimension = 4;
 
   function setupBoard(configuration, dimension) {
