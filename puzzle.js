@@ -4,7 +4,7 @@ function getBoard(variationNum) {
     
   if (variationNum === 2) {
     return {
-      boardConfiguration: [3,4,3,2,2,1,0,1,0,3,2,4,1,4,0,3],
+      boardConfiguration: [3,4,3,2,2,1,0,1,0,3,2,4,1,4,1,3],
       pieceDistribution: [3,3,3,4,3]
     }
   }
